@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stack App — Privacy Policy &amp; Non-Medical Disclaimer</title>
+  <style>
+    :root {
+      --bg-canvas: #1a1d20;
+      --bg-panel: #22262b;
+      --bg-card: #2a2f36;
+      --border: rgba(255, 255, 255, 0.1);
+      --text-primary: #ffffff;
+      --text-secondary: rgba(255, 255, 255, 0.72);
+      --accent-blue: #3b82f6;
+      --accent-red: #fca5a5;
+    }
+    body {
+      margin: 0;
+      background: var(--bg-canvas);
+      color: var(--text-primary);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.6;
+      padding: 32px 16px;
+    }
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 18px;
+    }
+    h1 {
+      margin: 0 0 6px;
+      font-size: 1.65rem;
+    }
+    h2 {
+      margin: 0 0 10px;
+      font-size: 1.1rem;
+      color: #93c5fd;
+    }
+    p, li {
+      color: var(--text-secondary);
+      font-size: 0.96rem;
+    }
+    .meta {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+    }
+    .disclaimer {
+      background: rgba(239, 68, 68, 0.14);
+      border: 1px solid rgba(239, 68, 68, 0.35);
+      border-radius: 12px;
+      padding: 18px 22px;
+      color: var(--accent-red);
+      font-size: 0.92rem;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Stack App — Privacy Policy</h1>
+    <p class="meta">Application ID: <code>com.stackapp.protocol</code> · Effective Date: 2026-11-13</p>
+
+    <section class="card">
+      <h2>1. Local-Only Storage (No Cloud Collection)</h2>
+      <p>
+        All supplement definitions, dose logs, adherence history, inventory counts, and home-screen
+        widget snapshots remain <strong>100% locally on this device</strong> using on-device SQLite
+        and system widget storage. Stack App does not require an account, does not contain
+        third-party analytics or advertising SDKs, and makes zero background network uploads.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>2. User-Initiated Data Sharing</h2>
+      <p>
+        Data leaves your device only if you explicitly select <strong>Share Text Summary</strong> on
+        the Export screen to pass a summary to an app of your choice through your device’s native
+        share sheet. You can modify or delete any stored supplement directly within the app or remove
+        all local data by uninstalling Stack App.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>3. Device Permissions Used</h2>
+      <ul>
+        <li>
+          <strong>Notifications (iOS &amp; Android 13+)</strong>: Used solely to deliver your
+          scheduled supplement window alerts and quick-action buttons (Mark Taken, Snooze 30m, Skip).
+        </li>
+        <li>
+          <strong>Exact Alarms (<code>SCHEDULE_EXACT_ALARM</code> on Android 12+/14+)</strong>:
+          Optional OS permission used solely so timed supplement windows and mineral-spacing delays
+          fire at the exact user-configured minute without battery-batching drift.
+        </li>
+      </ul>
+    </section>
+
+    <section class="disclaimer">
+      <strong>DISCLAIMER — NOT MEDICAL ADVICE:</strong> Stack App is an informational
+      organizational tool for personal protocol tracking only. It does not diagnose, treat, cure,
+      or prevent any disease. Consult a qualified healthcare professional before altering any
+      dietary or supplement regimen.
+    </section>
+  </main>
+</body>
+</html>
+
