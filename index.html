@@ -65,41 +65,104 @@
 <body>
   <main>
     <h1>Stack App — Privacy Policy</h1>
-    <p class="meta">Application ID: <code>com.stackapp.protocol</code> · Effective Date: 2026-11-13</p>
+    <p class="meta">Application ID: <code>com.stackapp.protocol</code> · Effective Date: 2026-11-20</p>
 
     <section class="card">
-      <h2>1. Local-Only Storage (No Cloud Collection)</h2>
+      <h2>1. Local-First Core Storage (Free Tier = 100% Offline)</h2>
       <p>
-        All supplement definitions, dose logs, adherence history, inventory counts, and home-screen
-        widget snapshots remain <strong>100% locally on this device</strong> using on-device SQLite
-        and system widget storage. Stack App does not require an account, does not contain
-        third-party analytics or advertising SDKs, and makes zero background network uploads.
+        All personal supplement definitions, intake dose logs, adherence streaks, daily hydration
+        and protein habit logs, personal biomarker records, inventory counts, cached reference
+        entries, and home-screen widget snapshots are stored <strong>100% locally on this device</strong>
+        using on-device SQLite (<code>stack_app.db</code>) and system widget storage. Stack App
+        does not require an account, contains zero third-party analytics or advertising SDKs, makes
+        zero outbound network requests on the Free tier, never initializes billing SDKs on the Free
+        tier, and never uploads personal health logs, inventory, or biomarker histories in the
+        background.
       </p>
     </section>
 
     <section class="card">
-      <h2>2. User-Initiated Data Sharing</h2>
+      <h2>2. User-Initiated Exports &amp; Owner-Scoped Crew Shares</h2>
       <p>
-        Data leaves your device only if you explicitly select <strong>Share Text Summary</strong> on
-        the Export screen to pass a summary to an app of your choice through your device’s native
-        share sheet. You can modify or delete any stored supplement directly within the app or remove
-        all local data by uninstalling Stack App.
+        Protocol summaries leave your device only when you explicitly initiate an action:
       </p>
-    </section>
-
-    <section class="card">
-      <h2>3. Device Permissions Used</h2>
       <ul>
         <li>
-          <strong>Notifications (iOS &amp; Android 13+)</strong>: Used solely to deliver your
-          scheduled supplement window alerts and quick-action buttons (Mark Taken, Snooze 30m, Skip).
+          <strong>Native OS Share Sheet</strong>: Tapping <strong>Share Text Summary</strong> under
+          the <strong>Share</strong> tab or <strong>Share List</strong> under the
+          <strong>Stack</strong> tab opens your device's system share sheet so you control the
+          destination app.
+        </li>
+        <li>
+          <strong>Opt-In Buddy / Crew Shares (Paid)</strong>: When explicitly shared under the
+          <strong>Share</strong> tab, moderated shares include only your display alias, compound
+          names, dosages, and optional adherence/streak metrics—never biomarkers, pricing,
+          inventory, or personal notes. When synced to our server, your pseudonymous
+          <code>owner_sub</code> token claim is stored solely server-side to authorize owner-only
+          deletion (<code>DELETE /v1/social/shares/:shareId</code>) and is omitted from public
+          group leaderboards.
+        </li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>3. Device Permissions &amp; On-Device Camera Processing</h2>
+      <ul>
+        <li>
+          <strong>Notifications (<code>POST_NOTIFICATIONS</code>)</strong>:
+          Used solely to deliver your scheduled supplement window alerts and quick-action buttons
+          (Mark Done, Snooze 30m, Skip).
         </li>
         <li>
           <strong>Exact Alarms (<code>SCHEDULE_EXACT_ALARM</code> on Android 12+/14+)</strong>:
           Optional OS permission used solely so timed supplement windows and mineral-spacing delays
           fire at the exact user-configured minute without battery-batching drift.
         </li>
+        <li>
+          <strong>Camera (<code>CAMERA</code> on Android / <code>NSCameraUsageDescription</code> on iOS)</strong>:
+          Used exclusively when you open the viewfinder inside <strong>Add Supplement</strong> to
+          scan a bottle UPC barcode or read supplement label text via <strong>on-device OCR</strong>
+          (Google ML Kit on Android / Apple Vision on iOS). Label photos are processed locally on
+          your device and are not uploaded by default. Microphone and external storage permissions
+          (<code>RECORD_AUDIO</code>, <code>READ_EXTERNAL_STORAGE</code>,
+          <code>WRITE_EXTERNAL_STORAGE</code>) are explicitly blocked and never requested.
+        </li>
       </ul>
+    </section>
+
+    <section class="card">
+      <h2>4. Subscriptions, Billing &amp; Optional Paid HTTPS Services</h2>
+      <p>
+        If you choose to subscribe or restore a Paid purchase:
+      </p>
+      <ul>
+        <li>
+          <strong>Verified Store Billing (<code>com.android.vending.BILLING</code> / StoreKit via RevenueCat)</strong>:
+          The RevenueCat billing SDK initializes only when you explicitly tap
+          <strong>Unlock Paid Tier</strong> or <strong>Restore Purchases</strong>. Store purchase
+          tokens and a pseudonymous <code>app_user_id</code> are transmitted over HTTPS to verify
+          your active entitlement and issue short-lived, <strong>15-minute signed HS256 JWTs</strong>.
+        </li>
+        <li>
+          <strong>Paid HTTPS Knowledge &amp; UPC Lookups</strong>:
+          Release builds enforce strict TLS (<code>https://</code>) for curated supplement catalog
+          delta sync (<code>ETag</code>), human-reviewed research digests, recall notices, and
+          opt-in UPC catalog lookups on local cache miss (cached locally in
+          <code>paid_upc_cache_v1</code> so repeat scans stay offline). Personal biomarkers, intake
+          logs, inventory, and pricing remain strictly on-device.
+        </li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>5. Data Retention &amp; Deletion Controls</h2>
+      <p>
+        You may edit or delete any supplement, habit, or biomarker entry directly in Stack App,
+        revoke any shared Paid crew snapshot anytime via <strong>Revoke Share</strong>
+        (<code>DELETE /v1/social/shares/:shareId</code>), cancel Paid subscriptions in Google Play
+        or Apple App Store account settings, or uninstall Stack App to remove all local SQLite
+        data permanently.
+      </p>
     </section>
 
     <section class="disclaimer">
@@ -111,4 +174,3 @@
   </main>
 </body>
 </html>
-
